@@ -18,7 +18,7 @@ public class Calculator {
 	private int defenceStatUA;
 	private int defenceStatMC;
 	private double defenceWeight;
-	private double movementWeight;
+	//private double movementWeight;
 	
 	private double advantage = 1;
 	
@@ -117,15 +117,15 @@ public class Calculator {
 
 	}
 	
-	public void setMovement(boolean move){
-		if(move){
-			defenceStat = defenceStatUA;
-			projectedStat = attackStatUA;
-			if(defenceWeight > 1) defenceWeight = 1;
+	public void setMovement(){
+		defenceStat = defenceStatUA;
+		projectedStat = attackStatUA;
+		defenceWeight = 0.25;
+		/*if(defenceWeight > 1) defenceWeight = 1;
 			movementWeight = 4;
 		}else{
 			movementWeight = 1;
-		}
+		}*/
 	}
 	
 	public void setUAatt(String s){
@@ -266,7 +266,7 @@ public class Calculator {
 	}
 	
 	public void calculate(){
-		double Aweight = (double)((double)attackStat * (double)attackWeight * (double)advantage * (double)movementWeight);
+		double Aweight = (double)((double)attackStat * (double)attackWeight * (double)advantage/* * (double)movementWeight*/);
 		double Dweight = (double)((double)defenceStat * (double)defenceWeight);
 		double weight = (Math.sqrt(Aweight / Dweight) / 2);
 		double weightedAttack = attack * weight;
@@ -320,7 +320,7 @@ public class Calculator {
 		try{
 			double result = Math.pow( (((1 - defence) * 2 ) / attack), 2);
 			double def = result * (double)projectedStat * (double)defenceWeight;
-			double att = (double)attackWeight * (double)advantage * (double)movementWeight;
+			double att = (double)attackWeight * (double)advantage/* * (double)movementWeight*/;
 			projected =  def / att;
 		}catch(Exception e){
 			projected = 0;

@@ -9,7 +9,8 @@ import javax.swing.text.*;
 import java.util.prefs.Preferences;
 
 public class Viewer implements ItemListener, ActionListener, AdjustmentListener{
-	private JFrame frame = new JFrame("Haven combat calculator 1.4");
+	String version = "1.5";
+	private JFrame frame = new JFrame("Haven combat calculator " + version);
 	Calculator calc;
 	private Preferences prefs;
 	
@@ -46,7 +47,8 @@ public class Viewer implements ItemListener, ActionListener, AdjustmentListener{
 	private JRadioButton neutralStance = new JRadioButton("Neutral Stance");
 	private JRadioButton bloodlustStance = new JRadioButton("Bloodlust Stance");
 	private JRadioButton shieldStance = new JRadioButton("Shield Stance");
-	private JCheckBox movement = new JCheckBox("Movement Hit");
+	private JRadioButton movement = new JRadioButton("Movement Hit");
+	//private JCheckBox movement = new JCheckBox("Movement Hit");
 	
 	private JLabel lblDefenceTot = new JLabel("Defence: ");
 	private JLabel lblPen = new JLabel("Armor Penetration: ");
@@ -100,7 +102,7 @@ public class Viewer implements ItemListener, ActionListener, AdjustmentListener{
 	}
 	
 	private JLabel copyright(){
-		JLabel titleLable = new JLabel("Haven Combat Calculator by Xcom v1.4");
+		JLabel titleLable = new JLabel("Haven Combat Calculator by Xcom v" + version);
 		titleLable.setHorizontalAlignment(SwingConstants.RIGHT);
 		titleLable.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 10));
 		
@@ -404,6 +406,7 @@ public class Viewer implements ItemListener, ActionListener, AdjustmentListener{
 	    buttonGroupDef.add(neutralStance);
 	    buttonGroupDef.add(bloodlustStance);
 	    buttonGroupDef.add(shieldStance);
+	    buttonGroupDef.add(movement);
 	    
 	    buttonPanel.add(neutralStance);
 	    buttonPanel.add(bloodlustStance);
@@ -526,9 +529,11 @@ public class Viewer implements ItemListener, ActionListener, AdjustmentListener{
 			calc.setBloodlust();
 		}else if(shieldStance.isSelected()) {
 			calc.setShield();
+		}else if(movement.isSelected()) {
+			calc.setMovement();
 		}
 		
-		calc.setMovement(movement.isSelected());
+		//calc.setMovement(movement.isSelected());
 	}
 	
 	public void actionPerformed(ActionEvent e) {
